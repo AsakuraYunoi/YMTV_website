@@ -1,0 +1,32 @@
+{
+    "items": [
+        {
+            "title": "2024运动会",
+            "subtitle": "大连育明高级中学第26届体育运动大会",
+            "cover": "/src/images/carousel_cover/运动会.jpg",
+            "preview": "",
+            "link": "//player.bilibili.com/player.html?isOutside=true&aid=113269377405746&bvid=BV1ab2EYfEYB&cid=26193168976&p=1"
+        },
+        {
+            "title": "《冬至阳生·青衿凌云》",
+            "subtitle": "大连育明高中2025届高三成人礼先导片",
+            "cover": "/src/images/carousel_cover/成人礼.jpeg",
+            "preview": "",
+            "link": "//player.bilibili.com/player.html?isOutside=true&aid=113705383630234&bvid=BV1CVkXYAEiA&cid=27517716472&p=1"
+        },
+        {
+            "title": "2025届最后一操",
+            "subtitle": "",
+            "cover": "/src/images/carousel_cover/最后一操.jpeg",
+            "preview": "",
+            "link": "//player.bilibili.com/player.html?isOutside=true&aid=114641250292466&bvid=BV1UZT5zsEyL&cid=30368926195&p=1"
+        },
+        {
+            "title": "2025届高考送行",
+            "subtitle": "",
+            "cover": "/src/images/carousel_cover/高考送行.jpeg",
+            "preview": "",
+            "link": "//player.bilibili.com/player.html?isOutside=true&aid=114641250291809&bvid=BV1UZT5zsEqd&cid=30368795521&p=1"
+        }
+    ]
+}

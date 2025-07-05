@@ -1,0 +1,32 @@
+{
+    "HomeView":[
+        {
+            "videoSrc": "/src/videos/splash-video.mp4",
+            "logoSrc": "/Logo.svg"
+        }
+    ],
+
+    "SocialMedia":[
+        {
+            "name": "Bilibili",
+            "url": "https://space.bilibili.com/667815074",
+            "icon": "/src/images/SocialMedia/icon/bilibili.svg"
+        },
+        {
+            "name": "视频号",
+            "url": "",
+            "icon": "/src/images/SocialMedia/icon/ShiPinHao.svg",
+            "QRcode": "/src/images/SocialMedia/QRcode_视频号.png"
+        },
+        {
+            "name": "抖音",
+            "url": "https://www.douyin.com/user/MS4wLjABAAAQ1b0k2a3f5c7g",
+            "icon": "/src/images/SocialMedia/icon/DouYin.svg"
+        },
+        {
+            "name": "小红书",
+            "url": "https://www.xiaohongshu.com/user/profile/5ff0b1c0000000000010d2a3",
+            "icon": "/src/images/SocialMedia/icon/XiaoHongShu.svg"
+        }
+    ]
+}
