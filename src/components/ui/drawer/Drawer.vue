@@ -9,7 +9,9 @@ const props = withDefaults(defineProps<DrawerRootProps>(), {
 
 const emits = defineEmits<DrawerRootEmits>()
 
-const forwarded = useForwardPropsEmits(props, emits)
+// 使用 any 类型断言来解决 TypeScript 的类型推断问题
+const forwarded = useForwardPropsEmits(props, emits) as any
+
 </script>
 
 <template>
