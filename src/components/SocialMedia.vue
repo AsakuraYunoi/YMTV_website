@@ -33,136 +33,131 @@ onMounted(async () => {
 </script>
 
 <template>
-  <div class="social-media-container">
-    <h2 class="social-title">关注我们</h2>
-    <div class="social-media-list">
-      <template v-for="(item, idx) in socialMedias" :key="item.name">
-        <a
-          v-if="item.url"
-          class="social-media-btn"
-          :href="item.url"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <img :src="item.icon" :alt="item.name" class="social-icon" />
-          <span class="social-name">{{ item.name }}</span>
-        </a>
-        <div
-          v-else
-          class="social-media-btn"
-          style="cursor: pointer; position: relative;"
-        >
-          <img :src="item.icon" :alt="item.name" class="social-icon" />
-          <span class="social-name">{{ item.name }}</span>
-          <div v-if="item.QRcode" class="qr-hover">
-            <img :src="item.QRcode" alt="二维码" class="qr-img" />
-            <span class="qr-tip">扫码关注</span>
-          </div>
+  <div class="social-media-list">
+    <template v-for="(item, idx) in socialMedias" :key="item.name">
+      <a
+        v-if="item.url"
+        class="social-media-btn"
+        :href="item.url"
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        <img :src="item.icon" :alt="item.name" class="social-icon" />
+      </a>
+      <div
+        v-else
+        class="social-media-btn"
+      >
+        <img :src="item.icon" :alt="item.name" class="social-icon" />
+        <div v-if="item.QRcode" class="qr-hover">
+          <img :src="item.QRcode" alt="二维码" class="qr-img" />
         </div>
-      </template>
-    </div>
+      </div>
+    </template>
   </div>
 </template>
 
 <style scoped>
-.social-media-container {
-  width: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  padding: 3rem 0 4rem 0;
-  background: rgba(255,255,255,0.85);
-  border-radius: 2rem;
-  box-shadow: 0 8px 32px rgba(0,0,0,0.08);
-  margin: 0 auto;
-  max-width: 700px;
-}
-
-.social-title {
-  font-size: 2rem;
-  font-weight: 700;
-  letter-spacing: 0.1em;
-  color: #222;
-  margin-bottom: 2rem;
-  text-shadow: 0 2px 8px rgba(0,0,0,0.04);
-}
-
 .social-media-list {
   display: flex;
-  flex-wrap: wrap;
-  gap: 2.5rem;
+  flex-direction: row;
+  gap: 1.2rem;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  padding: 1.5rem 0;
+  background: none;
 }
 
 .social-media-btn {
   display: flex;
-  flex-direction: column;
   align-items: center;
-  background: #fff;
-  border-radius: 1.2rem;
-  box-shadow: 0 4px 16px rgba(0,0,0,0.06);
-  padding: 1.2rem 2.2rem;
-  transition: transform 0.2s, box-shadow 0.2s;
+  justify-content: center;
+  background: #f7f7f7;
+  border-radius: 1.5rem;
+  box-shadow: none;
+  width: 54px;
+  height: 54px;
+  transition: 
+    width 0.3s cubic-bezier(.4,2,.6,1), 
+    height 0.3s cubic-bezier(.4,2,.6,1),
+    box-shadow 0.3s, 
+    background 0.3s;
   position: relative;
-  min-width: 110px;
-  min-height: 120px;
   cursor: pointer;
   user-select: none;
+  overflow: visible;
 }
+
 .social-media-btn:hover {
-  transform: translateY(-8px) scale(1.05);
-  box-shadow: 0 8px 32px rgba(0,0,0,0.12);
+  width: 140px;
+  height: 90px;
+  background: #fff;
+  box-shadow: 0 4px 24px rgba(0,0,0,0.10);
   z-index: 2;
 }
 
 .social-icon {
-  width: 48px;
-  height: 48px;
-  margin-bottom: 1rem;
+  width: 28px;
+  height: 28px;
   object-fit: contain;
   filter: drop-shadow(0 2px 8px rgba(0,0,0,0.08));
-}
-
-.social-name {
-  font-size: 1.1rem;
-  font-weight: 600;
-  color: #333;
-  letter-spacing: 0.05em;
+  transition: width 0.3s, height 0.3s;
 }
 
 .qr-hover {
   display: none;
   position: absolute;
-  top: 110%;
   left: 50%;
-  transform: translateX(-50%);
+  top: 50%;
+  transform: translate(-50%, -50%);
   background: #fff;
   border-radius: 1rem;
   box-shadow: 0 4px 16px rgba(0,0,0,0.12);
-  padding: 1rem 1.2rem 0.7rem 1.2rem;
+  padding: 0.5rem 0.7rem 0.4rem 0.7rem;
   z-index: 10;
   text-align: center;
-  min-width: 120px;
-}
-.social-media-btn:hover .qr-hover {
-  display: block;
+  min-width: 70px;
   animation: fadeIn 0.3s;
 }
-.qr-img {
-  width: 90px;
-  height: 90px;
-  object-fit: contain;
-  margin-bottom: 0.5rem;
+
+.social-media-btn:hover .qr-hover {
+  display: block;
 }
-.qr-tip {
-  font-size: 0.95rem;
-  color: #666;
-  letter-spacing: 0.03em;
+
+.qr-img {
+  width: 50px;
+  height: 50px;
+  object-fit: contain;
+  margin: 0 auto;
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px);}
-  to { opacity: 1; transform: translateY(0);}
+  from { opacity: 0; transform: translate(-50%, -40%);}
+  to { opacity: 1; transform: translate(-50%, -50%);}
+}
+
+/* 响应式适配 */
+@media (max-width: 600px) {
+  .social-media-list {
+    gap: 0.7rem;
+    padding: 1rem 0;
+  }
+  .social-media-btn {
+    width: 40px;
+    height: 40px;
+  }
+  .social-media-btn:hover {
+    width: 100px;
+    height: 60px;
+  }
+  .social-icon {
+    width: 20px;
+    height: 20px;
+  }
+  .qr-img {
+    width: 36px;
+    height: 36px;
+  }
 }
 </style>

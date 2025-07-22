@@ -2,6 +2,8 @@
 import { ref, onMounted } from 'vue';
 import VideoCarousel from '@/components/VideoCarousel.vue';
 import SocialMedia from '@/components/SocialMedia.vue';
+import ActivityPublicList from '@/components/ActivityPublicList.vue';
+import Shop from '@/components/Shop.vue';
 
 const videoSrc = ref('');
 const logoSrc = ref('');
@@ -29,7 +31,7 @@ onMounted(async () => {
   <div class="scroll-container">
     
     <!-- 1.封面页 -->
-    <div class="splash-container">
+    <div class="splash-container" id="splash">
       <video
         :src="videoSrc"
         type="video/mp4"
@@ -55,26 +57,47 @@ onMounted(async () => {
     </div>
 
     <!-- 2.视频轮播组件 -->
-    <div class="page2" style="padding-bottom: 4rem; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
+    <div class="page2" id="video-carousel" style="padding-bottom: 0rem; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
       <div class="page2_title" style="padding-bottom: 4rem">
         <h1>YMTV</h1>
         <h2>YOUTH MOMENT TV</h2>
       </div>
+
       <div class="video-carousel"><VideoCarousel /></div>
+
     </div>
 
     <!-- 3.社交媒体链接 -->
-    <div>
+    <div class="SocialMedia" id="social-media" style="height: 20vh;">
       <SocialMedia />
     </div>
 
+    <!-- 4.活动列表 -->
+    <div class="activity-section" id="activity-list">
+      <div class="activity-header">
+        <h2 class="activity-title">活动公式</h2>
+        <button class="activity-all-btn" @click="">查看全部</button>
+      </div>
+      <div class="ActivityPublicList activity-list-scroll">
+        <ActivityPublicList />
+      </div>
+    </div>
+
+    <!-- 5.商店 -->
+    <div class="shop-section" id="shop" style="padding: 2rem;">
+      <Shop />
+    </div>
+
+    
   </div>
+
 
 
 </template>
 
 <style scoped>
-/* 滚动容器样式 */
+/* --滚动容器样式-- */
+
 .scroll-container {
   overflow-y: auto; /* 允许垂直滚动 */
   scrollbar-width: none; /* Firefox */
@@ -84,7 +107,8 @@ onMounted(async () => {
   display: none; /* Chrome/Safari/Opera */
 }
 
-/* 闪屏页容器样式 */
+
+/* --闪屏页容器样式-- */
 .splash-container {
   position: relative; /* 相对定位 */
   width: 100%;
@@ -94,7 +118,6 @@ onMounted(async () => {
   justify-content: center;
   align-items: center;
 }
-
 /* 背景视频样式 */
 .background-video {
   position: absolute;
@@ -105,10 +128,9 @@ onMounted(async () => {
   width: auto;
   height: auto;
   transform: translateX(-50%) translateY(-50%);
-  z-index: -1;
+  z-index: 0;
   object-fit: cover;
 }
-
 /* 内容容器样式 */
 .content {
   display: flex;
@@ -121,12 +143,10 @@ onMounted(async () => {
   animation: fadeIn 1s ease-in forwards;
   animation-delay: 0.2s;
 }
-
 /* Logo容器样式 */
 .logo-container {
 
 }
-
 /* Logo图片样式 */
 .logo {
   max-width: 300px;
@@ -135,17 +155,17 @@ onMounted(async () => {
   animation: float 3s ease-in-out infinite;
 }
 
-/* 视频轮播图样式 */
+
+/* --视频轮播图样式-- */
 .video-carousel {
   position: relative;
   width: 100%;
-  
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-/* 分隔线样式 */
+/* --分隔线样式-- */
 .delimiter {
   display: flex;
   margin-top: 1rem;
@@ -166,6 +186,37 @@ onMounted(async () => {
   margin-right: 2rem;
   justify-self: flex-end;
 }
+
+
+/* --活动列表样式-- */
+.activity-section {
+  padding: 2rem 0;
+
+}
+.activity-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+.activity-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+.activity-all-btn {
+  padding: 0.5rem 1rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: #007bff;
+  border: none;
+  border-radius: 0.25rem;
+  cursor: pointer;
+}
+.activity-list-scroll {
+  max-height: 400px;
+  overflow-y: auto;
+}
+
 
 /* 动画关键帧 */
 @keyframes float {

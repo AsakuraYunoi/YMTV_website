@@ -1,0 +1,35 @@
+{
+    "config": {
+        "Title": "我们的风采",
+        "Content": "YMTV Website Configuration",
+        "spacing": "4rem",
+        "Background": {
+            "Color": "#f0f0f0",
+            "Blur": "10"
+        }
+    },
+
+    "team": [
+        {
+          "id": "1",
+          "year": "2025",
+          "image": "./src/images/TeamMate/2022.jpg",
+          "background": "./src/images/TeamMate/2023.jpg",
+          "description": "如果你停止，就是谷底。如果你还在继续，就是上坡。这是我听过关于人生低谷最好的阐述。"
+        },
+        {
+          "id": "2",
+          "year": "2024",
+          "image": "./src/images/TeamMate/2023.jpg",
+          "background": "./src/images/TeamMate/2022.jpg",
+          "description": "人生的每一个阶段都有它的意义。"
+        },
+        {
+          "id": "3",
+          "year": "2023",
+          "image": "./src/images/TeamMate/2023.jpg",
+          "background": "./src/images/TeamMate/2022.jpg",
+          "description": "每一次努力，都是在为未来铺路。"
+        }
+    ]
+}
