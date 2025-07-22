@@ -1,6 +1,8 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+
 import NavBar from './components/NavBar.vue'
+import Footer from './components/Footer.vue';
 </script>
 
 <template>
@@ -9,8 +11,10 @@ import NavBar from './components/NavBar.vue'
     <div id="smooth-content">
     <div vaul-drawer-wrapper id="app"><!-- shadcn 弹窗缩背景 -->
       <RouterView /> <!-- 使用RouterView来渲染路由组件 -->
+      <Footer /> <!-- 全局页脚 -->
     </div>
     </div>
+      
   </div>
 </template>
 
