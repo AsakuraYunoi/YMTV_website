@@ -59,8 +59,8 @@ onMounted(async () => {
     <!-- 2.视频轮播组件 -->
     <div class="page2" id="video-carousel" style="padding-bottom: 0rem; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
       <div class="page2_title" style="padding-bottom: 4rem">
-        <h1>YMTV</h1>
-        <h2>YOUTH MOMENT TV</h2>
+        <h1>RECOMMEND</h1>
+        <h2>2025年度巨献</h2>
       </div>
 
       <div class="video-carousel"><VideoCarousel /></div>

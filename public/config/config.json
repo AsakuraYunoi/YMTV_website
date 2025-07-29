@@ -1,4 +1,10 @@
 {
+    "NavBar":[
+        {
+            "招新按钮": true
+        }
+    ],
+    
     "HomeView":[
         {
             "videoSrc": "/src/videos/splash-video.mp4",

@@ -27,6 +27,20 @@
             "cover": "/src/images/carousel_cover/高考送行.jpeg",
             "preview": "",
             "link": "//player.bilibili.com/player.html?isOutside=true&aid=114641250291809&bvid=BV1UZT5zsEqd&cid=30368795521&p=1"
+        },
+        {
+            "title": "航拍育明",
+            "subtitle": "2025中招宣传",
+            "cover": "/src/images/carousel_cover/航拍育明.jpeg",
+            "preview": "",
+            "link": "//player.bilibili.com/player.html?isOutside=true&aid=114815733404969&bvid=BV19iGEz9E7Z&cid=30913728299&p=1"
+        },
+        {
+            "title": "育明色谱",
+            "subtitle": "大连育明高级中学2025届高三毕业纪念片",
+            "cover": "/src/images/carousel_cover/育明色谱.jpeg",
+            "preview": "",
+            "link": "//player.bilibili.com/player.html?isOutside=true&aid=114702235472910&bvid=BV1KyN5z7EoU&cid=30557277049&p=1"
         }
     ]
 }

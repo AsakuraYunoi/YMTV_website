@@ -14,14 +14,14 @@
           "id": "1",
           "year": "2025",
           "image": "./src/images/TeamMate/2022.jpg",
-          "background": "https://ymtv-website.vercel.app/src/images/TeamMate/2023.jpg",
+          "background": "./src/images/TeamMate/2022.jpg",
           "description": "如果你停止，就是谷底。如果你还在继续，就是上坡。这是我听过关于人生低谷最好的阐述。"
         },
         {
           "id": "2",
           "year": "2024",
           "image": "./src/images/TeamMate/2023.jpg",
-          "background": "https://ymtv-website.vercel.app/src/images/TeamMate/2023.jpg",
+          "background": "./src/images/TeamMate/2022.jpg",
           "description": "人生的每一个阶段都有它的意义。"
         },
         {

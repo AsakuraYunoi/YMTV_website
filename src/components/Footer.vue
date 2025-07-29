@@ -9,9 +9,7 @@
 
           <div class="footer-column">
             <h4>FOLLOW US</h4>
-            <a href="https://github.com/your-repo" target="_blank" rel="noopener noreferrer">GitHub</a>
-            <a href="#" target="_blank" rel="noopener noreferrer">Weibo</a>
-            <a href="#" target="_blank" rel="noopener noreferrer">Bilibili</a>
+            <a href="https://space.bilibili.com/667815074" target="_blank" rel="noopener noreferrer">Bilibili</a>
           </div>
 
           <div class="footer-column">
@@ -79,7 +77,7 @@ const flipCard = () => {
 
 onMounted(async () => {
   try {
-    const response = await fetch('https://v1.hitokoto.cn?c=i'); // c=i 获取动漫/动画/游戏分类
+    const response = await fetch('https://v1.hitokoto.cn?c=i&c=d'); // c=i 获取诗歌分类，c=d 获取文学分类
     const data = await response.json();
     hitokoto.value = data.hitokoto;
   } catch (error) {
@@ -151,7 +149,6 @@ onMounted(async () => {
 
 /* 保证 .footer-column 下的 a 标签换行显示 */
 .footer-column a {
-  display: block; /* 换行显示每个链接 */
   position: relative;
   color: #1a1a1a;
   text-decoration: none;
