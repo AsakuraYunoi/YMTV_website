@@ -2,7 +2,6 @@
   "build": {
     "env": {
       "NPM_CONFIG_CACHE": "/tmp/.npm"
-    },
-    "command": "rm -rf node_modules package-lock.json && npm install && npm run build"
+    }
   }
 }
