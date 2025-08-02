@@ -30,7 +30,7 @@
 
     <div class="footer-bottom-bar">
       <span>YOUTH MOMENT TV</span>
-      <span>Copyright©1998-2025</span>
+      <span>Copyright©1998-{{ currentYear }}</span>
     </div>
 
     <div class="card-area">
@@ -70,6 +70,7 @@ import { ref, onMounted } from 'vue';
 
 const isFlipped = ref(false);
 const hitokoto = ref('Loading...');
+const currentYear = ref('...');
 
 const flipCard = () => {
   isFlipped.value = !isFlipped.value;
@@ -77,12 +78,21 @@ const flipCard = () => {
 
 onMounted(async () => {
   try {
-    const response = await fetch('https://v1.hitokoto.cn?c=i&c=d'); // c=i 获取诗歌分类，c=d 获取文学分类
+    const response = await fetch('/api/hitokoto'); // c=i 获取诗歌分类，c=d 获取文学分类
     const data = await response.json();
     hitokoto.value = data.hitokoto;
   } catch (error) {
     console.error('Failed to fetch Hitokoto:', error);
     hitokoto.value = '每一个不曾起舞的日子，都是对生命的辜负。';
+  }
+
+  // 获取年份
+  try {
+    const res = await fetch('/api/year');
+    const data = await res.json();
+    currentYear.value = data.year;
+  } catch (error) {
+    currentYear.value = new Date().getFullYear().toString();
   }
 });
 </script>

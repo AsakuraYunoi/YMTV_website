@@ -1,0 +1,60 @@
+{
+  "ShopItems": [
+    {
+      "id": 1,
+      "title": "TEXT",
+      "description": "2025",
+      "price": "9.90",
+      "image": "src/images/Shop/good1.jpeg",
+      "link": "https://www.bing.com"
+    },
+    {
+      "id": 2,
+      "title": "TEXT",
+      "description": "2025",
+      "price": "9.90",
+      "image": "src/images/Shop/good2.jpeg",
+      "link": "#product2"
+    },
+    {
+      "id": 3,
+      "title": "TEXT",
+      "description": "2025",
+      "price": "9.90",
+      "image": "src/images/Shop/good3.jpeg",
+      "link": "#product3"
+    },
+    {
+      "id": 4,
+      "title": "4",
+      "description": "2025",
+      "price": "9.90",
+      "image": "src/images/Shop/good2.jpeg",
+      "link": "#product4"
+    },
+    {
+      "id": 5,
+      "title": "5",
+      "description": "2025",
+      "price": "9.90",
+      "image": "src/images/Shop/good1.jpeg",
+      "link": "#product5"
+    },
+    {
+      "id": 6,
+      "title": "6",
+      "description": "2025",
+      "price": "9.90",
+      "image": "src/images/Shop/good2.jpeg",
+      "link": "#product6"
+    },
+    {
+      "id": 7,
+      "title": "7",
+      "description": "2025",
+      "price": "9.90",
+      "image": "src/images/Shop/good3.jpeg",
+      "link": "#product7"
+    }
+  ]
+}

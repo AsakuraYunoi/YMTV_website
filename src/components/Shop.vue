@@ -1,238 +1,191 @@
-<template>
-  <div class="shop-display">
-    <header class="shop-header">
-      <h1 class="shop-title">随风新装</h1>
-      <a href="#" class="view-more">
-        <span class="view-more-text">访问笑店 +</span>
-      </a>
-    </header>
+<script setup>
+import { ref, onMounted } from 'vue';
 
-    <div class="product-grid">
-      <div v-for="product in products" :key="product.id" class="product-card">
-        <div class="product-image-wrapper">
-          <img
-            :src="product.image"
-            :alt="product.name"
-            class="product-image"
-          />
-        </div>
-        <div class="product-info">
-          <h3 class="product-name">{{ product.name }}</h3>
-          <p class="product-collection">{{ product.collection }}</p>
-          <p class="product-price">¥{{ product.price.toFixed(2) }}</p>
-        </div>
+const shopItems = ref([]);
+const error = ref(null);
+
+onMounted(async () => {
+  try {
+    const response = await fetch('config/shop.json');
+    if (!response.ok) {
+      throw new Error(`网络请求失败: ${response.statusText}`);
+    }
+    const data = await response.json();
+    shopItems.value = data.ShopItems;
+  } catch (e) {
+    error.value = `无法加载商品信息: ${e.message}`;
+    console.error(e);
+  }
+});
+</script>
+
+<template>
+  <div class="shop-wrapper">
+    <p v-if="error" class="error-message">{{ error }}</p>
+
+    <div v-else-if="shopItems.length" class="shop-container">
+      <div
+        v-for="item in shopItems"
+        :key="item.id"
+        :class="['shop-item', `item-${item.id}`]"
+      >
+        <a :href="item.link" target="_blank" rel="noopener noreferrer" class="item-link-wrapper">
+          <div class="image-container" :style="{ backgroundImage: `url(${item.image})` }"></div>
+          
+          <div class="item-info">
+            <p class="item-title">{{ item.title }}</p>
+            <p class="item-sub-title">{{ item.description }}</p>
+            <p class="item-price">¥ {{ item.price }}</p>
+          </div>
+        </a>
       </div>
     </div>
+
+    <p v-else>正在加载商品...</p>
   </div>
 </template>
 
-<script>
-export default {
-  name: 'ShopDisplay',
-  data() {
-    return {
-      products: [
-        {
-          id: 1,
-          name: '“淬”抗真短袖',
-          collection: '代号/2025 SS',
-          price: 99.00,
-          image: '/src/images/Shop/good1.jpeg',
-        },
-        {
-          id: 2,
-          name: '后龙衬衫',
-          collection: '代号/2025 SS',
-          price: 199.00,
-          image: '/src/images/Shop/good2.jpeg',
-        },
-        {
-          id: 3,
-          name: '四维暖T',
-          collection: '代号/2025 SS',
-          price: 99.00,
-          image: '/src/images/Shop/good3.jpeg',
-        },
-        // Add more products as needed, referencing good1.jpeg, good2.jpeg, good3.jpeg
-        // For demonstration, I'll reuse images. In a real app, you'd have unique images.
-        {
-          id: 4,
-          name: '讨厌型人格T',
-          collection: '代号/2025 SS',
-          price: 99.00,
-          image: '/src/images/Shop/good1.jpeg', // Example: Reuse image
-        },
-        {
-          id: 5,
-          name: '复古解构T',
-          collection: '代号/2025 SS',
-          price: 199.00,
-          image: '/src/images/Shop/good2.jpeg', // Example: Reuse image
-        },
-        {
-          id: 6,
-          name: '口袋装饰罩',
-          collection: '代号/2025 SS',
-          price: 129.00,
-          image: '/src/images/Shop/good3.jpeg', // Example: Reuse image
-        },
-        {
-          id: 7,
-          name: '随纪防晒衣',
-          collection: '代号/2025 SS',
-          price: 169.00,
-          image: '/src/images/Shop/good1.jpeg', // Example: Reuse image
-        },
-      ],
-    };
-  },
-};
-</script>
-
 <style scoped>
-/* Base styling inspired by Shadcn UI and the provided image */
-.shop-display {
-  font-family: 'Inter', sans-serif; /* A common font in Shadcn */
-  background-color: #f8fafc; /* Light background similar to Shadcn */
-  padding: 2rem;
-  max-width: 1200px;
-  margin: 0 auto;
-  color: #333;
-}
-
-.shop-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 2rem;
-  border-bottom: 1px solid #e2e8f0; /* Subtle border like Shadcn */
-  padding-bottom: 1rem;
-}
-
-.shop-title {
-  font-size: 1.8rem;
-  font-weight: 700;
-  color: #1a202c; /* Darker text for titles */
-}
-
-.view-more {
-  text-decoration: none;
-  color: #64748b; /* Muted link color */
-  font-size: 0.9rem;
-  display: flex;
-  align-items: center;
-  gap: 0.25rem;
-  padding: 0.5rem 1rem;
-  border-radius: 0.375rem; /* Rounded corners */
-  border: 1px solid #e2e8f0;
-  transition: background-color 0.2s, color 0.2s;
-}
-
-.view-more:hover {
-  background-color: #f1f5f9;
-  color: #1e293b;
-}
-
-.view-more-text {
-  font-weight: 500;
-}
-
-.product-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-  gap: 1.5rem;
-}
-
-.product-card {
-  background-color: #ffffff;
-  border-radius: 0.5rem;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06); /* Subtle shadow */
-  overflow: hidden;
-  transition: transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
-  cursor: pointer;
-  border: 1px solid #e2e8f0; /* Shadcn-like border */
-}
-
-.product-card:hover {
-  transform: translateY(-5px); /* Slight lift on hover */
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05); /* Enhanced shadow */
-}
-
-.product-image-wrapper {
+.shop-wrapper {
   width: 100%;
-  height: 350px; /* Adjust height as needed */
-  overflow: hidden;
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 15px;
+  box-sizing: border-box;
+}
+
+.shop-container {
+  display: grid;
+  gap: 15px;
+}
+
+.shop-item {
   position: relative;
-}
-
-.product-image {
-  width: 100%; /* Ensure image fills its container initially */
-  height: 100%;
-  object-fit: cover; /* Cover the area, cropping if necessary */
-  transition: transform 0.3s ease-in-out; /* Smooth transition for zoom */
-}
-
-.product-card:hover .product-image {
-  transform: scale(1.08); /* Enlarge effect on hover */
-}
-
-.product-info {
-  padding: 1rem;
-  text-align: center; /* Centered text as in the example */
-}
-
-.product-name {
-  font-size: 1.1rem;
-  font-weight: 600;
-  margin-bottom: 0.25rem;
-  color: #1a202c;
-  white-space: nowrap;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
   overflow: hidden;
-  text-overflow: ellipsis;
+  border-radius: 8px;
+  background-color: #f5f5f5;
 }
 
-.product-collection {
-  font-size: 0.85rem;
-  color: #64748b;
-  margin-bottom: 0.5rem;
+.item-link-wrapper {
+  display: contents;
+  color: inherit;
+  text-decoration: none;
 }
 
-.product-price {
-  font-size: 1.1rem;
-  font-weight: 700;
-  color: #ef4444; /* A prominent color for price, similar to some Shadcn accent colors */
+/* 图片容器样式 */
+.image-container {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-size: cover;
+  background-position: top right;
+  transition: transform 0.35s ease-in-out;
+  z-index: 1;
 }
 
-/* Responsive adjustments */
+/* 鼠标悬浮时图片放大效果 */
+.shop-item:hover .image-container {
+  transform: scale(1.05);
+}
+
+.item-info {
+  position: relative;
+  z-index: 2;
+  padding: 15px;
+  text-align: left;
+  color: white;
+  background: linear-gradient(to top, rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.0) 80%);
+}
+
+/* 为所有文字添加细微的描边和阴影，增强可读性 */
+.item-info p {
+  text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  margin: 0;
+}
+
+.item-info .item-title {
+  font-size: 16px;
+  font-weight: bold;
+}
+
+.item-info .item-sub-title {
+  font-size: 12px;
+  color: #eee;
+  margin: 4px 0;
+}
+
+.item-info .item-price {
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 4px;
+}
+
+/* ---- 桌面端布局 (屏幕宽度 > 768px) ---- */
+@media (min-width: 769px) {
+  .shop-container {
+    grid-template-columns: repeat(9, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    /* 七个 */
+    grid-template-areas:
+      "item-1 item-1 item-1 item-2 item-2 item-3 item-3 item-4 item-4"
+      "item-1 item-1 item-1 item-2 item-2 item-3 item-3 item-4 item-4"
+      "item-1 item-1 item-1 item-2 item-2 item-3 item-3 item-4 item-4"
+      "item-1 item-1 item-1 item-5 item-5 item-6 item-6 item-7 item-7"
+      "item-1 item-1 item-1 item-5 item-5 item-6 item-6 item-7 item-7"
+      "item-1 item-1 item-1 item-5 item-5 item-6 item-6 item-7 item-7";
+
+    min-height: 80vh;
+  }
+
+  .item-1 { grid-area: item-1; }
+  .item-2 { grid-area: item-2; }
+  .item-3 { grid-area: item-3; }
+  .item-4 { grid-area: item-4; }
+  .item-5 { grid-area: item-5; }
+  .item-6 { grid-area: item-6; }
+  .item-7 { grid-area: item-7; }
+
+  .item-3,
+  .item-5,
+  .item-7 {
+    background-color: #e9e9e9;
+  }
+}
+
+/* ---- 移动端布局 (屏幕宽度 <= 768px) ---- */
 @media (max-width: 768px) {
-  .product-grid {
-    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
-    gap: 1rem;
+  .shop-container {
+    grid-template-columns: 1fr 1fr;
+    grid-auto-rows: auto;
+    grid-template-areas:
+      "item-1   item-1"
+      "item-2   item-3"
+      "item-4   item-5"
+      "item-6   item-7";
   }
 
-  .shop-title {
-    font-size: 1.5rem;
-  }
-
-  .product-image-wrapper {
-    height: 300px;
+  .item-1 { grid-area: item-1; aspect-ratio: 16 / 9; }
+  .item-2 { grid-area: item-2; aspect-ratio: 1 / 1; }
+  .item-3 { grid-area: item-3; aspect-ratio: 1 / 1; }
+  .item-4 { grid-area: item-4; aspect-ratio: 1 / 1; }
+  .item-5 { grid-area: item-5; aspect-ratio: 1 / 1; }
+  .item-6 { grid-area: item-6; aspect-ratio: 1 / 1; }
+  .item-7 { grid-area: item-7; aspect-ratio: 1 / 1; }
+  
+  .shop-item:not(.item-1):nth-of-type(odd) {
+      background-color: #e9e9e9;
   }
 }
 
-@media (max-width: 480px) {
-  .shop-display {
-    padding: 1rem;
-  }
-
-  .product-grid {
-    grid-template-columns: 1fr; /* Single column on very small screens */
-  }
-
-  .product-image-wrapper {
-    height: 250px;
-  }
+.error-message {
+  color: #d9534f;
+  text-align: center;
+  padding: 20px;
+  font-size: 18px;
 }
 </style>

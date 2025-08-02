@@ -7,7 +7,7 @@
     
     "HomeView":[
         {
-            "videoSrc": "/src/videos/splash-video.mp4",
+            "videoSrc": "/src/videos/tmpVideo.webm",
             "logoSrc": "/Logo.svg"
         }
     ],

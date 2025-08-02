@@ -1,13 +1,17 @@
 <script setup lang="ts">
 import { ref, onMounted } from 'vue';
+import { useRouter } from 'vue-router';
 import VideoCarousel from '@/components/VideoCarousel.vue';
 import SocialMedia from '@/components/SocialMedia.vue';
 import ActivityPublicList from '@/components/ActivityPublicList.vue';
 import Shop from '@/components/Shop.vue';
 
+
+
 const videoSrc = ref('');
 const logoSrc = ref('');
 
+const currentYear = ref('...');
 
 onMounted(async () => {
   try {
@@ -20,6 +24,16 @@ onMounted(async () => {
   } catch (error) {
     console.error('Failed to load Config', error);
   }
+
+  // 获取年份
+  try {
+    const res = await fetch('/api/year');
+    const data = await res.json();
+    currentYear.value = data.year;
+  } catch (error) {
+    currentYear.value = new Date().getFullYear().toString();
+  }
+
 });
 </script>
 
@@ -34,7 +48,7 @@ onMounted(async () => {
     <div class="splash-container" id="splash">
       <video
         :src="videoSrc"
-        type="video/mp4"
+        type="video/webm"
         autoplay
         muted
         loop
@@ -53,16 +67,16 @@ onMounted(async () => {
     <div class="delimiter">
       <span class="delimiter_left">· YOUTH_MOMENT_TV</span>
       <span class="delimiter_middle">INFINITE PROGRESS</span>
-      <span class="delimiter_right">2 0 2 5 ·</span>
+      <span class="delimiter_right">{{ currentYear }}·</span>
     </div>
 
     <!-- 2.视频轮播组件 -->
     <div class="page2" id="video-carousel" style="padding-bottom: 0rem; height: 100vh; display: flex; flex-direction: column; align-items: center; justify-content: center;">
-      <div class="page2_title" style="padding-bottom: 4rem">
-        <h1>RECOMMEND</h1>
-        <h2>2025年度巨献</h2>
+      <div class="page2_title" style="padding-bottom: 4rem; text-align: center;">
+        <h2 style="font-size: 1.5rem; color: #aaa; margin-top: 0.5rem;">RECOMMEND</h2>
+        <h1 style="font-size: 2.5rem; color: #333; font-weight: bolder; letter-spacing: 0.2rem;">{{ currentYear }}年度巨献</h1>
       </div>
-
+      
       <div class="video-carousel"><VideoCarousel /></div>
 
     </div>
@@ -74,17 +88,34 @@ onMounted(async () => {
 
     <!-- 4.活动列表 -->
     <div class="activity-section" id="activity-list">
-      <div class="activity-header">
-        <h2 class="activity-title">活动公式</h2>
-        <button class="activity-all-btn" @click="">查看全部</button>
+      <div class="blockContent-header">
+        <div class="blockContent-title">
+          <h3>MATERIAL</h3>
+          <h2>活动公式</h2>
+        </div>
+        <button class="blockContent-all-btn" @click="$router.push('/activities')">
+          查看全部
+          <span class="plus-icon">+</span>
+        </button>
       </div>
-      <div class="ActivityPublicList activity-list-scroll">
+
+      <div class="activity-list-scroll">
         <ActivityPublicList />
       </div>
     </div>
 
     <!-- 5.商店 -->
-    <div class="shop-section" id="shop" style="padding: 2rem;">
+    <div class="shop-section" id="shop">
+      <div class="blockContent-header">
+        <div class="blockContent-title">
+          <h3>SHOP</h3>
+          <h2>周边商店</h2>
+        </div>
+        <button class="blockContent-all-btn" @click="$router.push('/shop')">
+          查看全部
+          <span class="plus-icon">+</span>
+        </button>
+      </div>
       <Shop />
     </div>
 
@@ -181,42 +212,76 @@ onMounted(async () => {
   left: 50%;
   transform: translateX(-50%);
   white-space: nowrap;
+  letter-spacing: 0.1rem; /* 增加字母间距 */
 }
 .delimiter_right {
   margin-right: 2rem;
   justify-self: flex-end;
+  letter-spacing: 0.2rem; /* 增加字母间距 */
 }
-
 
 /* --活动列表样式-- */
 .activity-section {
-  padding: 2rem 0;
-
+  padding: 2rem 0 0 0;
+  margin-bottom: 4rem;
 }
-.activity-header {
+.activity-list-scroll {
+  
+  overflow-y: auto;
+}
+
+/* --商店样式-- */
+.shop-section {
+  padding: 2rem 0 0 0;
+}
+
+/* --块级标题样式-- */
+.blockContent-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 1.5rem;
+  margin-left: 2rem;
+  margin-right: 2rem;
 }
-.activity-title {
-  font-size: 1.5rem;
+.blockContent-title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+.blockContent-title h2 {
+  font-size: 2rem;
+  color: #333;
   font-weight: bold;
+  margin: 0;
 }
-.activity-all-btn {
+.blockContent-title h3 {
+  font-size: 1.2rem;
+  color: #666;
+  margin: 0;
+}
+.blockContent-all-btn {
   padding: 0.5rem 1rem;
   font-size: 1rem;
-  color: #fff;
-  background-color: #007bff;
-  border: none;
+  color: #000000; 
   border-radius: 0.25rem;
   cursor: pointer;
-}
-.activity-list-scroll {
-  max-height: 400px;
-  overflow-y: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.3s ease;
 }
 
+.plus-icon {
+  margin-left: 0.5rem; 
+  font-size: 1.2rem;
+  display: inline-block;
+  transition: transform 0.3s ease;
+}
+
+.blockContent-all-btn:hover .plus-icon {
+  transform: rotate(90deg); /* 顺时针旋转90度 */
+}
 
 /* 动画关键帧 */
 @keyframes float {
@@ -234,4 +299,10 @@ onMounted(async () => {
   }
 }
 
+/* 媒体查询 响应式布局 */
+@media (max-width: 768px) {
+  .delimiter_left,
+  .delimiter_right {
+    display: none; /* 隐藏左右分隔线 */
+  }}
 </style>

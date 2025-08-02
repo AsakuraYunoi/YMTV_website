@@ -27,14 +27,25 @@ const showComponentsBtn = ref(false)
 const isMobileMenuOpen = ref(false)
 // 一言内容
 const hitokoto = ref('Loading...');
+// 当前年份
+const currentYear = ref('...');
+
 onMounted(async () => {
   try {
-    const response = await fetch('https://v1.hitokoto.cn?c=i&c=d'); // c=i 获取诗歌分类，c=d 获取文学分类
+    const response = await fetch('/api/hitokoto'); 
     const data = await response.json();
     hitokoto.value = data.hitokoto;
   } catch (error) {
     console.error('Failed to fetch Hitokoto:', error);
     hitokoto.value = '每一个不曾起舞的日子，都是对生命的辜负。';
+  }
+  // 获取年份
+  try {
+    const res = await fetch('/api/year');
+    const data = await res.json();
+    currentYear.value = data.year;
+  } catch (error) {
+    currentYear.value = new Date().getFullYear().toString();
   }
 });
 
@@ -126,7 +137,7 @@ function scrollToAnchor(anchor: string) {
                     >
                       <div class="text-sm font-medium leading-none">热门作品</div>
                       <p class="line-clamp-2 text-sm leading-snug text-muted-foreground">
-                        2025年度巨献
+                        {{ currentYear }}年度巨献
                       </p>
                     </a>
                   </NavigationMenuLink>
@@ -240,7 +251,7 @@ function scrollToAnchor(anchor: string) {
       </nav>
       <!-- 底部版权信息 -->
       <div class="py-4 text-center text-xs text-muted-foreground border-t border-border">
-        © 2025 YMTV. All rights reserved.
+        © {{ currentYear }} YMTV. All rights reserved.
       </div>
     </DrawerContent>
   </Drawer>
