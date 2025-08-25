@@ -104,7 +104,7 @@ onMounted(async () => {
 .site-footer {
   min-height: 80vh;
   position: relative; /* 关键：为内部绝对定位的元素提供参照物 */
-  background-color: #f0f0f0;
+  background-color: #e6e6e6f2;
   color: #1a1a1a;
   font-family: 'Inter', 'Helvetica Neue', Helvetica, Arial, sans-serif;
   overflow: hidden;

@@ -1,8 +1,39 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
+import { onMounted, onUnmounted } from 'vue';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { ScrollSmoother } from 'gsap/ScrollSmoother';
+
+// 导入我们创建的共享状态
+import { smoother } from './plugins/gsap-smoother.ts';
 
 import NavBar from './components/NavBar.vue'
 import Footer from './components/Footer.vue';
+
+onMounted(() => {
+  // 注册 GSAP 插件
+  gsap.registerPlugin(ScrollTrigger, ScrollSmoother);
+
+  // 创建 ScrollSmoother 实例
+  const smootherInstance = ScrollSmoother.create({
+    wrapper: '#smooth-wrapper',
+    content: '#smooth-content',
+    smooth: 1.5, // 你可以根据需要调整平滑度
+    effects: true, // 如果你需要视差等效果
+  });
+
+  // 将创建的实例赋值给共享状态
+  smoother.value = smootherInstance;
+});
+
+onUnmounted(() => {
+  // 在组件卸载时，清理 GSAP 实例，防止内存泄漏
+  if (smoother.value) {
+    smoother.value.kill();
+    smoother.value = null;
+  }
+});
 </script>
 
 <template>

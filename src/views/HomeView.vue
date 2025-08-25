@@ -6,7 +6,7 @@ import SocialMedia from '@/components/SocialMedia.vue';
 import ActivityPublicList from '@/components/ActivityPublicList.vue';
 import Shop from '@/components/Shop.vue';
 
-
+import '@/assets/dark/HomeViewDark.css';
 
 const videoSrc = ref('');
 const logoSrc = ref('');

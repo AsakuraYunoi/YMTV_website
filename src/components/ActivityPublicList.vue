@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick } from 'vue'
+import '@/assets/dark/ActivitiesDark.css'
 import {
   Drawer,
   DrawerContent,
@@ -169,7 +170,7 @@ onMounted(async () => {
   max-width: 540px;
   margin: 0 auto;
   padding: 2rem 1rem 3rem 1rem;
-  background: rgba(255,255,255,0.85);
+  background: rgba(255, 255, 255, 0);
   display: flex;
   flex-direction: column;
   align-items: center;

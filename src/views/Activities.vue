@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { ref, onMounted, nextTick, computed } from 'vue'
+import '@/assets/dark/ActivitiesDark.css'
 import {
   Drawer,
   DrawerContent,

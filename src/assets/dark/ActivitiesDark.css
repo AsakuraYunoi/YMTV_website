@@ -1,0 +1,69 @@
+@media (prefers-color-scheme: dark) {
+  /* 定义暗黑模式下的颜色变量 */
+  :root {
+    --text-primary: #e0e0e0;
+    --text-secondary: #a0a0a0;
+    --text-recommend: #888;
+    --text-delimiter: #e0e0e0;
+    --text-button: #e0e0e0;
+    --bg-primary: #12121200;
+    --bg-secondary: #1e1e1e;
+    --border-color: #333;
+    --hover-bg: #2b2b2b;
+  }
+
+  .activity-full-page-root {
+    background: var(--bg-primary) !important;
+  }
+
+  .header-section h1 {
+    color: var(--text-primary) !important;
+  }
+
+  .intro-text {
+    color: var(--text-secondary) !important;
+  }
+
+  .search-input {
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border-color: var(--border-color) !important;
+  }
+
+  .search-input::placeholder {
+    color: var(--text-secondary) !important;
+  }
+  
+  .search-button {
+    background: var(--bg-secondary) !important;
+    color: var(--text-primary) !important;
+    border: 1px solid var(--border-color) !important;
+  }
+  
+  .search-button:hover {
+    background: var(--hover-bg) !important;
+  }
+
+  .activity-list-btn {
+    background: var(--bg-secondary) !important;
+    border: 1px solid var(--border-color) !important;
+    color: var(--text-primary) !important;
+  }
+
+  .activity-list-btn:hover {
+    background: var(--hover-bg) !important;
+    transform: none !important; /* 保持一致性，取消悬停时的位移效果 */
+  }
+
+  .activity-title {
+    color: var(--text-primary) !important;
+  }
+  
+  .activity-time {
+    color: var(--text-secondary) !important;
+  }
+
+  .loading-message, .no-results-message, .loading-more-message {
+    color: var(--text-secondary) !important;
+  }
+}
